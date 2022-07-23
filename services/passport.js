@@ -22,9 +22,8 @@ passport.use(
         callbackURL: '/auth/google/callback'
     }, 
     (accessToken, refreshToken, profile, done) => {
-        console.log('accessToken: ', accessToken);
-        console.log('refreshToken: ', refreshToken);
-        console.log('profile: ', profile);
+        console.log('Google email: ', profile.emails);
+        console.log('Name: ', profile.name.givenName + ' ' + profile.name.familyName);
 
         User.findOne({ googleID: profile.id }).then((existingUser)=> {
             if(existingUser){
